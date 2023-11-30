@@ -1,0 +1,61 @@
+<div class="main">
+    <div class="main__heading">
+        <h2 class="main__heading__h2">Task Tracker</h2>
+    </div>
+    <div class="main__newTask">
+        <div class="card main__newTask__card">
+            <h5 class="card-header">New Task</h5>
+            <div class="card-body">
+                <form class="main__newTask__form" (ngSubmit)="onaddTask(tData,taskForm)" #tData="ngForm">
+                    <div class=" main__newTask__form__top">
+                        <div class="form-group">
+                            <label for="username">Name</label>
+                            <input type="name" class="form-control" id="username" name="username"
+                                placeholder="Enter Name" [(ngModel)]="taskForm.name" #name='ngModel'>
+                        </div>
+                        <div class=" form-group main__newTask__form__description">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" placeholder="Enter Description"
+                                [(ngModel)]="taskForm.description" #description='ngModel' name=" description">
+                        </div>
+                    </div>
+                    <div class="main__newTask__form__bottom">
+                        <div class="main__tasks__stat">
+                            <p>Status : </p>
+                            <select class="form-control main__tasks__statuss" [(ngModel)]="taskForm.status"
+                                #status='ngModel' id="status" name="status">
+                                <option selected>Active</option>
+                                <option>In-Active</option>
+                                <option>Unknown</option>
+                            </select>
+                        </div>
+                        <div class="subbtn">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="main__tasks">
+        <div class="title">
+            <h2>Tasks</h2>
+        </div>
+        <div class="main__tasks__taskSection">
+            <div class="card main__tasks__card" *ngFor="let task of taskData;index as i">
+                <h5 class="card-header">{{task.name}}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{task.description}}</h5>
+                    <p class="card-text main__tasks__status">Status : {{task.status}}</p>
+                    <div class="main__tasks__button">
+                        <button type="button" class="btn btn-success" (click)="updateStatus(task.status,i)">Update
+                            Status</button>
+                        <button type="button" class="btn btn-danger" (click)="deleteData(i)">Delete</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
